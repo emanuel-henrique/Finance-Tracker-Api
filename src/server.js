@@ -2,7 +2,6 @@ import "express-async-error";
 import express from "express";
 import { Routes } from "./Routes/index.js";
 import { appError } from "./Utils/AppError.js";
-
 import cors from "cors";
 
 const app = express();
@@ -26,6 +25,11 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Mudança aqui: prioriza a PORT do Render
-const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
+// Para desenvolvimento local
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
+  app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
+}
+
+// Exportar para Vercel (ES Module syntax)
+export default app;
