@@ -26,5 +26,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-const PORT = process.env.SERVER_PORT || 3000;
+// Mudança aqui: prioriza a PORT do Render
+const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
