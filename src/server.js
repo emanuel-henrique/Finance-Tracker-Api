@@ -25,11 +25,5 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Para desenvolvimento local
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || process.env.SERVER_PORT || 3000;
-  app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
-}
-
-// Exportar para Vercel (ES Module syntax)
-export default app;
+const PORT = process.env.SERVER_PORT || 3333;
+app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
