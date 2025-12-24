@@ -8,17 +8,17 @@ class sessionsController {
   async Create(req, res) {
     const { email, password } = req.body;
 
-    const user = await prisma.user.findUnique({
+    const userToAuth = await prisma.user.findUnique({
       where: {
         email,
       },
     });
 
-    if (!user) {
+    if (!userToAuth) {
       throw new appError("E-mail e/ou senha incorretos.", 401);
     }
 
-    const comparePassword = await compare(password, user.password);
+    const comparePassword = await compare(password, userToAuth.password);
 
     if (!comparePassword) {
       throw new appError("E-mail e/ou senha incorretos.", 401);
@@ -26,11 +26,18 @@ class sessionsController {
 
     const { secret, expiresIn } = authConfig.jwt;
     const token = jwt.sign({}, secret, {
-      subject: String(user.id),
+      subject: String(userToAuth.id),
       expiresIn,
     });
 
-    return res.status(200).json({ user, token });
+    return res.status(200).json({
+      user: {
+        id: userToAuth.id,
+        name: userToAuth.name,
+        email: userToAuth.email,
+      },
+      token,
+    });
   }
 }
 
