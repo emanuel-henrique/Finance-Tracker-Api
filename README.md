@@ -1,14 +1,24 @@
 # Finance Tracker - BackEnd
 
-API REST para gerenciamento de finanças pessoais, permitindo controle de receitas, despesas. Desenvolvida com Node.js, Express,PostgreSQL e PrismaORM, oferece autenticação e endpoints para análise financeira do usuário.
+![Node.js](https://img.shields.io/badge/Node.js-16+-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-blue)
+![Express](https://img.shields.io/badge/Express-4.x-lightgrey)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748)
 
-## 🚀 Começando
+API REST para gerenciamento de finanças pessoais, permitindo controle de receitas e despesas. Desenvolvida com Node.js, Express, PostgreSQL e Prisma ORM, oferece autenticação segura e endpoints para análise financeira do usuário.
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+## ✨ Funcionalidades
+
+- ✅ Autenticação JWT
+- ✅ CRUD completo de transações financeiras
+- ✅ Filtros e busca de transações
+- ✅ Gerenciamento de usuários
+- ✅ Criptografia de senhas
+- ✅ Validação de dados
+
+## 🚀 Como Executar
 
 ### 📋 Pré-requisitos
-
-Para executar este projeto, você precisará ter instalado:
 
 ```
 Node.js (versão 16 ou superior)
@@ -19,97 +29,94 @@ Git
 
 ### 🔧 Instalação
 
-Siga estes passos para configurar o ambiente de desenvolvimento:
-
 1. Clone o repositório:
-
 ```bash
 git clone https://github.com/emanuel-henrique/Finance_Tracker-BackEnd.git
 cd Finance_Tracker-BackEnd
 ```
 
 2. Instale as dependências:
-
 ```bash
 npm install
 ```
 
 3. Configure as variáveis de ambiente criando um arquivo `.env`:
-
-4. Edite o arquivo `.env` com suas credenciais:
-
 ```env
 SERVER_PORT=3000
 DATABASE_URL=postgresql://usuario:senha@localhost:5432/finance_tracker
 TOKEN_SECRET=seu_secret_aqui
 ```
 
-6. Gere o PrismaClient:
-
+4. Gere o Prisma Client:
 ```bash
 npx prisma generate
 ```
 
-7. Execute as migrations do banco de dados:
-
+5. Execute as migrations do banco de dados:
 ```bash
 npx prisma migrate dev
 ```
 
-8. Inicie o servidor de desenvolvimento:
-
+6. Inicie o servidor:
 ```bash
-npm start
-
-O servidor estará rodando em `http://localhost:suaporta`
+npm run dev
 ```
 
-## 🛠️ Construído com
+O servidor estará rodando em `http://localhost:3000`
+
+## 🛠️ Tecnologias
 
 - [Node.js](https://nodejs.org/) - Runtime JavaScript
-- [Express](https://expressjs.com/) - Framework web minimalista
-- [PostgreSQL](https://www.postgresql.org/) - Banco de dados relacional
-- [Prisma](https://www.prisma.io/docs) - ORM para Node.js
-- [JWT](https://jwt.io/) - Autenticação via JSON Web Tokens
-- [bcrypt](https://www.npmjs.com/package/bcrypt) - Hashing de senhas
-- [ESLint](https://eslint.org/) - Linter para JavaScript
-- [Prettier](https://prettier.io/) - Formatador de código
-- [dotenv](https://www.npmjs.com/package/dotenv) - Gerenciamento de variáveis de ambiente
+- [Express](https://expressjs.com/) - Framework web
+- [PostgreSQL](https://www.postgresql.org/) - Banco de dados
+- [Prisma](https://www.prisma.io/docs) - ORM
+- [JWT](https://jwt.io/) - Autenticação
+- [bcrypt](https://www.npmjs.com/package/bcrypt) - Criptografia de senhas
 
-## 🔌 API Endpoints
+## 🔌 Endpoints da API
 
-### Sessions
-
-- `POST /sessions` - Login e geração token
+### Autenticação
+- `POST /sessions` - Login e geração de token
+  ```json
+  {
+    "email": "usuario@email.com",
+    "password": "senha123"
+  }
+  ```
 
 ### Usuário
-
 - `POST /users/create` - Cadastrar novo usuário
-- `PUT /users/update` - Atualizar informações do usuário
+- `PUT /users/update` - Atualizar usuário (requer autenticação)
 
 ### Transações
-
-- `POST /transactions/create` - Criar nova transação
-- `GET /transactions/:id` - Detalhes transação por ID
-- `GET /transactions/?type=Despesa&title=` - Filtro de pesquisa das transações
+- `POST /transactions/create` - Criar transação (requer autenticação)
+  ```json
+  {
+    "title": "Salário",
+    "amount": 5000.00,
+    "type": "Receita",
+  }
+  ```
+- `GET /transactions/:id` - Buscar transação por ID
+- `GET /transactions/?type=Despesa&title=` - Filtrar transações
 - `PUT /transactions/:id` - Atualizar transação
 - `DELETE /transactions/:id` - Deletar transação
-
-## ✒️ Autores
-
-- **Emanuel Henrique** - _Desenvolvimento Backend e DB_ - [Dev](https://github.com/emanuel-henrique)
-
-- **Emanuel Henrique** - Desenvolvimento FrontEnd - [Dev](https://github.com/emanuel-henrique)
-
-## 🎁 Expressões de gratidão
-
-- Conte a outras pessoas sobre este projeto 📢
-- Dê uma ⭐️ no projeto se ele te ajudou!
-- Compartilhe seu feedback para melhorarmos continuamente
 
 ## 🔐 Segurança
 
 - Senhas criptografadas com bcrypt
-- Tokens JWT com expiração configurável
-- Validação de entrada em todas as rotas
-- CORS configurado adequadamente
+- Autenticação via JWT
+- Queries seguras com Prisma ORM
+- Validação de dados nas rotas
+
+## 👨‍💻 Autor
+
+**Emanuel Henrique** - [GitHub](https://github.com/emanuel-henrique) | [LinkedIn](https://www.linkedin.com/in/emanuel-henrique-38b264392/)
+
+## 📝 Sobre o Projeto
+
+Projeto desenvolvido para aplicar conhecimentos em desenvolvimento backend, APIs RESTful e banco de dados relacionais.
+
+---
+
+⭐ Se este projeto te ajudou de alguma forma, considere dar uma estrela!
